@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class TriceBuildNavButton extends StatelessWidget {
+  final  IconData icon;
+  final  String label;
+  final  VoidCallback onTap;
+
+  const TriceBuildNavButton({
+   required this.icon,  
+    required this.label, 
+    required this.onTap, 
+  });
+  
 
   @override
   Widget build(BuildContext context) {

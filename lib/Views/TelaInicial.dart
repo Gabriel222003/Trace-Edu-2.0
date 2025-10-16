@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:trace_edu/Models/ModelMateria.dart';
+import 'package:trace_edu/Controllers/ControllerMateria.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-class HomeScreen extends StatefulWidget {
-  final Function(int) onTabChange;
+class TelaInicial extends StatefulWidget {
+  final ControllerMateria controllerMateria = ControllerMateria();
 
-  const HomeScreen({super.key, required this.onTabChange});
+  TelaInicial({super.key,});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _TelaInicialState createState() => _TelaInicialState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _TelaInicialState extends State<TelaInicial> {
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     icon: Icons.calendar_today,
                     label: 'Faltas',
                     onTap: () {
-                      widget.onTabChange(1); // Navega para a aba Faltas
+                       // Navega para a aba Faltas
                     },
                   ),
                   _buildNavButton(
@@ -66,20 +68,27 @@ class _HomeScreenState extends State<HomeScreen> {
                     icon: Icons.book,
                     label: 'Notas',
                     onTap: () {
-                      widget.onTabChange(2); // Navega para a aba Notas
+                       // Navega para a aba Notas
                     },
                   ),
                   _buildNavButton(
                     context,
                     icon: Icons.edit,
                     label: 'Matérias',
+                    // Pensar na lógica que tenho que executar aqui 
                     onTap: () async {
-                      final newSubject = await Navigator.pushNamed(
+                      // Navega para a tela de adicionar matéria (Vai dar erro pois falta a tela )
+                      final novaMateria = await Navigator.pushNamed(
                         context,
-                        '/add_subject',
+                        '/cadastrarMateria',
                       );
-                      if (newSubject != null && newSubject is Subject) {
-                        addSubject(newSubject);
+                      if (novaMateria != null && novaMateria is ModelMateria) {
+                        /* PRECIOSO CRIAR UM METODO QUE COLOCA UM NOVO VALOR NA LISTA DE MATÉRIAS.
+                              ------------------- aqui ---------------------------------          
+                        */
+
+                        // Método que não deve estar na View?? Conversar com o Erick!!!!
+                        widget.controllerMateria.adicionaMateria(novaMateria);
                       }
                     },
                   ),
@@ -121,11 +130,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     BarChartData(
                       alignment: BarChartAlignment.spaceAround,
                       maxY: 100,
-                      barGroups: List.generate(subjects.length, (y){
+                      barGroups: List.generate(widget.controllerMateria.tamanho, (y){
                         return BarChartGroupData(
                           x: y,
                           barRods: [
-                              BarChartRodData(toY: presenca[y], color: cor()[y], width: 20, borderRadius: BorderRadius.circular(20)),
+                              BarChartRodData(toY: widget.controllerMateria.presenca[y], color: widget.controllerMateria.criaPilaresGraficos()[y], width: 20, borderRadius: BorderRadius.circular(20)),
                           ]
                         );
                       }),
@@ -150,11 +159,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             showTitles: true,
                             getTitlesWidget: (meta, value) {
                               final index = meta.toInt();
-                              if (index < subjects.length) {
+                              if (index < widget.controllerMateria.tamanho) {
                                 return Padding(
                                   padding: const EdgeInsets.only(top: 8.0),
                                   child: Text(
-                                    subjects[index].name,
+                                    widget.controllerMateria.listaMaterias[index].nome,
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 12,

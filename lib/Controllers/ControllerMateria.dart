@@ -6,8 +6,11 @@ class ControllerMateria {
   late List<int> falta;
   late List<double> presenca;
   late List<String> nomes;
+  late List<ModelMateria> listaMaterias;
+  late int tamanho = 0;
   
-  void getMaterias(){
+  List<ModelMateria> getMaterias(){
+    // Aqui vai ter uma requisição para o servidor, onde vai ser mostrado os dados 
     /*Lista de matérias*/ 
     List<ModelMateria> subjects = [
       ModelMateria(nome: 'Arqui. de Computadores', presenca: 100, faltas: 0),
@@ -15,7 +18,24 @@ class ControllerMateria {
       ModelMateria(nome: 'Controle', presenca: 70, faltas: 30),
       ModelMateria(nome: 'Redes I', presenca: 90, faltas: 10),
       ModelMateria(nome: 'Programação III', presenca: 80, faltas: 20),
-    ]; 
+    ];
+
+    listaMaterias = subjects;
+    tamanho = subjects.length;
+
+    return subjects;
+  }
+
+  void adicionaMateria(ModelMateria materia){
+    listaMaterias.add(materia);
+    tamanho++;
+  }
+
+  List<Color> criaPilaresGraficos(){
+    List<ModelMateria> subjects = getMaterias();  
+
+    //Conversar com o André sobre as logicas de cores e como elas está aparecendo na tela inicial 
+
     /*Mover subjects para vetor*/
     nomes = subjects.map((no) => no.nome).toList();
     presenca = subjects.map((pres) => pres.presenca.toDouble()).toList();
@@ -37,5 +57,6 @@ class ControllerMateria {
       }
       return cores;
     } 
+    return cor();
   }
 }

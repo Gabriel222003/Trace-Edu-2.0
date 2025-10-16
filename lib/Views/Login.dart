@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:trace_edu/Componentes/TriceText.dart';
 import 'package:trace_edu/Componentes/TriceTextField.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class Login extends StatelessWidget {
+  const Login({super.key});
 
 
   @override
@@ -47,7 +47,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 24.0),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/main');
+                    Navigator.pushReplacementNamed(context, '/telaInicial');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
@@ -72,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                 const SizedBox(height: 16.0),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/register');
+                    Navigator.pushNamed(context, '/registrar');
                   },
                   child: const TriceText(
                     label: 'Cadastrar',
