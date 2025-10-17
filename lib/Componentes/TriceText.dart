@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TriceText extends StatelessWidget {
   final String label;
   final double fontSize;
-  final FontWeight fontWeight;
+  final FontWeight? fontWeight;
   final TextDecoration? decoration;
   final Color? color;
   final String? fontFamily;
@@ -12,7 +12,7 @@ class TriceText extends StatelessWidget {
   const TriceText({ 
     required this.label, 
     required this.fontSize, 
-    required this.fontWeight,
+    this.fontWeight,
     this.decoration,
     this.color,
     this.fontFamily,
@@ -27,7 +27,7 @@ class TriceText extends StatelessWidget {
       style: TextStyle(
         color: color?? Colors.white,
         fontSize: fontSize,
-        fontWeight: fontWeight,
+        fontWeight: fontWeight?? FontWeight.normal,
         decoration: decoration ?? TextDecoration.none,
         decorationColor: Colors.blueAccent,
         fontFamily: fontFamily?? "Roboto",

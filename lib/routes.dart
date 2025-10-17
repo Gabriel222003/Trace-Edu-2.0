@@ -4,6 +4,7 @@ import '../Views/BemVindo.dart';
 import '../Views/Registro.dart';
 import '../Views/CadastrarMateria.dart';
 import '../Views/TelaInicial.dart';
+import '../Views/Menu.dart';
 
 class Routes {
   static Map<String, WidgetBuilder> routes = { 
@@ -12,6 +13,6 @@ class Routes {
     '/bemVindo': (context) => const Bemvindo(),
     '/cadastrarMateria': (context) => const CadastrarMateria(),
     '/telaInicial': (context) => TelaInicial(),
-
+    '/menu': (context) => Menu(),
   };
 }

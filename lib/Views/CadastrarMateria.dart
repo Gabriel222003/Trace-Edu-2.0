@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Controllers/ControllerCadastrarMateria.dart';
+import '../Componentes/TriceText.dart';
+import '../Componentes/TriceBottomNavigationBar.dart';
 
 class CadastrarMateria extends StatelessWidget {
   const CadastrarMateria({super.key});
@@ -12,21 +14,21 @@ class CadastrarMateria extends StatelessWidget {
     final presencaController = TextEditingController();
     final faltasController = TextEditingController();
 
-    return Scaffold(
+    return Scaffold(appBar: AppBar(
+        title: Text("Cadastrar Matéria"),
+      ),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Text(
-                'Cadastrar Matéria',
-                style: TextStyle(
-                  fontSize: 36,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+              const TriceText(
+                label: 'Matéria',
+                fontSize: 36,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
               ),
               const SizedBox(height: 40.0),
               TextField(controller: nomeController, decoration: const InputDecoration(labelText: 'Nome da Matéria')),
@@ -41,14 +43,11 @@ class CadastrarMateria extends StatelessWidget {
                 },
                 child: const Text('Adicionar'),
               ),
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Voltar'),
-              ),
             ],
           ),
         ),
       ),
+      bottomNavigationBar: const TriceBottomNavigationBar(numeroTela: 3),
     );
   }
 }
