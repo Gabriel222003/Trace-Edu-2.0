@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trace_edu/Models/ModelMateria.dart';
 import 'package:trace_edu/Controllers/ControllerMateria.dart';
 import 'package:fl_chart/fl_chart.dart';
+import '../Componentes/TriceText.dart';
 
 class TelaInicial extends StatefulWidget {
   final ControllerMateria controllerMateria = ControllerMateria();
@@ -30,21 +31,10 @@ class _TelaInicialState extends State<TelaInicial> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                'Bem-vindo ao Trace-Edu',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontFamily: 'Roboto',
-                  shadows: [
-                    Shadow(
-                      blurRadius: 8.0,
-                      color: Colors.blueAccent,
-                      offset: Offset(2.0, 2.0),
-                    ),
-                  ],
-                ),
+              const TriceText(
+                label: "Bem-vindo ao Trace-Edu",
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
               ),
               const SizedBox(height: 24.0),
               GridView.count(
@@ -78,17 +68,15 @@ class _TelaInicialState extends State<TelaInicial> {
                     // Pensar na lógica que tenho que executar aqui 
                     onTap: () async {
                       // Navega para a tela de adicionar matéria (Vai dar erro pois falta a tela )
-                      final novaMateria = await Navigator.pushNamed(
+                       final novaMateria = await Navigator.pushNamed(
                         context,
                         '/cadastrarMateria',
                       );
-                      if (novaMateria != null && novaMateria is ModelMateria) {
-                        /* PRECIOSO CRIAR UM METODO QUE COLOCA UM NOVO VALOR NA LISTA DE MATÉRIAS.
-                              ------------------- aqui ---------------------------------          
-                        */
 
-                        // Método que não deve estar na View?? Conversar com o Erick!!!!
-                        widget.controllerMateria.adicionaMateria(novaMateria);
+                      if (novaMateria != null && novaMateria is ModelMateria) {
+                        setState(() { // <-- ESSENCIAL: atualiza o gráfico
+                          widget.controllerMateria.adicionaMateria(novaMateria);
+                        });
                       }
                     },
                   ),
@@ -105,13 +93,11 @@ class _TelaInicialState extends State<TelaInicial> {
                 ],
               ),
               const SizedBox(height: 24.0),
-              const Text(
-                'Métricas de Desempenho',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white,
-                ),
+              const TriceText(
+                label: 'Métricas de Desempenho',
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Colors.white
               ),
               const SizedBox(height: 16.0),
               Expanded(
@@ -125,62 +111,74 @@ class _TelaInicialState extends State<TelaInicial> {
                     ),
                     borderRadius: BorderRadius.circular(12.0),
                   ),
-                  /*GRÁFICOOOOOOOOOOOOOO*/
+                  /* GRÁFICO MELHORADO */
                   child: BarChart(
                     BarChartData(
-                      alignment: BarChartAlignment.spaceAround,
+                      alignment: BarChartAlignment.spaceEvenly,
                       maxY: 100,
-                      barGroups: List.generate(widget.controllerMateria.tamanho, (y){
-                        return BarChartGroupData(
-                          x: y,
-                          barRods: [
-                              BarChartRodData(toY: widget.controllerMateria.presenca[y], color: widget.controllerMateria.criaPilaresGraficos()[y], width: 20, borderRadius: BorderRadius.circular(20)),
-                          ]
-                        );
-                      }),
+                      groupsSpace: widget.controllerMateria.tamanho > 6 ? 20 : 40, // espaçamento dinâmico
+                      barGroups: List.generate(
+                        widget.controllerMateria.tamanho > 10 ? 10 : widget.controllerMateria.tamanho,
+                        (y) {
+                          return BarChartGroupData(
+                            x: y,
+                            barRods: [
+                              BarChartRodData(
+                                toY: widget.controllerMateria.presenca[y],
+                                color: widget.controllerMateria.criaPilaresGraficos()[y],
+                                width: 22,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                       titlesData: FlTitlesData(
                         leftTitles: AxisTitles(
                           sideTitles: SideTitles(
                             showTitles: true,
                             reservedSize: 40,
-                            getTitlesWidget: (value, meta) {
-                              return Text(
-                                '${value.toInt()}%',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                ),
-                              );
-                            },
+                            getTitlesWidget: (value, meta) => TriceText(
+                              label: '${value.toInt()}%',
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.normal,
+                            ),
                           ),
                         ),
                         bottomTitles: AxisTitles(
                           sideTitles: SideTitles(
                             showTitles: true,
-                            getTitlesWidget: (meta, value) {
-                              final index = meta.toInt();
-                              if (index < widget.controllerMateria.tamanho) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(top: 8.0),
-                                  child: Text(
-                                    widget.controllerMateria.listaMaterias[index].nome,
-                                    style: const TextStyle(
+                            reservedSize: 60, // mais espaço para texto
+                            getTitlesWidget: (value, meta) {
+                              final index = value.toInt();
+                              if (index < widget.controllerMateria.listaMaterias.length &&
+                                  index < 10) {
+                                // pega nome e reduz se for muito longo
+                                String nome = widget.controllerMateria.listaMaterias[index].nome;
+                                if (nome.length > 12) {
+                                  nome = nome.substring(0, 10) + '...';
+                                }
+                                return Transform.rotate(
+                                  angle: -0.5, // ~30° em radianos
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: TriceText(
+                                      label: nome,
+                                      textAlign: TextAlign.center,
                                       color: Colors.white,
-                                      fontSize: 12,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.normal,
                                     ),
                                   ),
                                 );
                               }
-                              return const Text('');
+                              return const SizedBox.shrink();
                             },
                           ),
                         ),
-                        topTitles: const AxisTitles(
-                          sideTitles: SideTitles(showTitles: false),
-                        ),
-                        rightTitles: const AxisTitles(
-                          sideTitles: SideTitles(showTitles: false),
-                        ),
+                        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                        rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
                       ),
                       gridData: const FlGridData(show: false),
                       borderData: FlBorderData(show: false),
@@ -200,33 +198,16 @@ class _TelaInicialState extends State<TelaInicial> {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(12.0),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 4.0,
-              offset: Offset(2.0, 2.0),
-            ),
-          ],
+          boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 4.0, offset: Offset(2.0, 2.0))],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 32,
-              color: Colors.blue,
-            ),
+            Icon(icon, size: 32, color: Theme.of(context).colorScheme.primary),
             const SizedBox(height: 8.0),
-            Text(
-              label,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Colors.blue,
-              ),
-            ),
+            Text(label, style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 16, decoration: TextDecoration.none)),
           ],
         ),
       ),

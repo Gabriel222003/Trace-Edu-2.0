@@ -5,24 +5,33 @@ class TriceText extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final TextDecoration? decoration;
+  final Color? color;
+  final String? fontFamily;
+  final TextAlign? textAlign;
 
-  const TriceText({Key? key, 
+  const TriceText({ 
     required this.label, 
     required this.fontSize, 
     required this.fontWeight,
     this.decoration,
-  }) : super(key: key);
+    this.color,
+    this.fontFamily,
+    this.textAlign,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      this.label,
+      label,
+      textAlign: textAlign ?? TextAlign.start,
       style: TextStyle(
-        color: Colors.white,
-        fontSize: this.fontSize,
-        fontWeight: this.fontWeight,
-        decoration: decoration,
+        color: color?? Colors.white,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        decoration: decoration ?? TextDecoration.none,
         decorationColor: Colors.blueAccent,
+        fontFamily: fontFamily?? "Roboto",
+        
       ),
     );
   }

@@ -12,33 +12,21 @@ class Registro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(title: const Text('Registro')),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            TextField(
-              controller: nomeController,
-              decoration: const InputDecoration(labelText: 'Nome'),
-            ),
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(labelText: 'E-mail'),
-            ),
-            TextField(
-              controller: senhaController,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Senha'),
-            ),
+            TextField(controller: nomeController, decoration: const InputDecoration(labelText: 'Nome')),
+            const SizedBox(height: 12),
+            TextField(controller: emailController, decoration: const InputDecoration(labelText: 'E-mail')),
+            const SizedBox(height: 12),
+            TextField(controller: senhaController, obscureText: true, decoration: const InputDecoration(labelText: 'Senha')),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                controller.registrarUsuario(
-                  context,
-                  nomeController,
-                  emailController,
-                  senhaController,
-                );
+                controller.registrarUsuario(context, nomeController, emailController, senhaController);
               },
               child: const Text('Registrar'),
             ),

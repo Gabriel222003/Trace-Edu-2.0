@@ -9,7 +9,7 @@ import 'Views/BemVindo.dart';
 
 
 void main() async {
-  runApp(MyApp(false));
+  runApp(MyApp(true));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,10 +23,36 @@ class MyApp extends StatelessWidget {
       title: 'Projeto Flutter',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.blue.shade50, // cor de fundo clara e agradável
+        textTheme: ThemeData.light().textTheme.apply(
+          decoration: TextDecoration.none, // remove underline de todos os textos
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: Colors.white, // cor do fundo do campo de texto
+          hintStyle: TextStyle(color: Colors.grey[600]), // cor do texto de dica
+          labelStyle: TextStyle(color: Colors.blueAccent), // cor do label
+          prefixIconColor: Colors.blue, // ícones dentro do TextField
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.blueAccent),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.blue, width: 2),
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.blue.shade600,
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 24),
+          ),
+        ),
       ),
       home: isFirstTime ? const Bemvindo() : const Login(),
       routes: Routes.routes,
-      
     );
   }
 }

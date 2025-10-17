@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import '../Models/ModelMateria.dart';
+import 'ControllerMateria.dart';
 
 class ControllerCadastrarMateria {
+  final ControllerMateria controllerMateria = ControllerMateria();
+
   ModelMateria? validarMateria(
     TextEditingController nomeController,
     TextEditingController presencaController,
@@ -38,7 +41,6 @@ class ControllerCadastrarMateria {
       );
       return;
     }
-
     Navigator.pop(context, materia);
   }
 }
