@@ -19,9 +19,9 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF1B263B),
+      backgroundColor: Colors.lightBlue,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1B263B),
+        backgroundColor: Colors.lightBlue,
         elevation: 0,
         title: const Text(
           "Configurações",
@@ -41,7 +41,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
             title: const Text(
               "Notificações",
               style: TextStyle(
-                color: Colors.lightBlueAccent,
+                color: Colors.white,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -82,7 +82,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
             title: const Text(
               "Acessibilidade",
               style: TextStyle(
-                color: Colors.lightBlueAccent,
+                color: Colors.white,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -139,7 +139,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
             title: const Text(
               "Linguagem",
               style: TextStyle(
-                color: Colors.lightBlueAccent,
+                color: Colors.white,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -175,11 +175,11 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
           Divider(color: Colors.white30),
           // Seção: Zona de perigo
           ListTile(
-            leading: Icon(Icons.warning, color: Colors.white70),
+            leading: Icon(Icons.warning, color: Colors.red),
             title: const Text(
               "Zona de perigo",
               style: TextStyle(
-                color: Colors.lightBlueAccent,
+                color: Colors.red,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -219,24 +219,6 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-      // Barra inferior
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color(0xFF1B263B),
-        selectedItemColor: const Color(0xFF4FAAFF),
-        unselectedItemColor: Colors.white70,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Menu"),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Configurações",
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Perfil"),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: "Notificações",
           ),
         ],
       ),
