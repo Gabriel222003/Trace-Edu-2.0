@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:trace_edu/Views/Configuracoes.dart';
+import 'package:trace_edu/Views/PerfildoAluno.dart';
+import 'package:trace_edu/Views/TelaInicial.dart';
 import '../Controllers/ControllerCadastrarMateria.dart';
 import '../Componentes/TriceText.dart';
 import '../Componentes/TriceBottomNavigationBar.dart';
@@ -14,10 +17,11 @@ class CadastrarMateria extends StatelessWidget {
     final presencaController = TextEditingController();
     final faltasController = TextEditingController();
 
-    return Scaffold(appBar: AppBar(
+    return Scaffold(
+      backgroundColor: Colors.lightBlue,
+      appBar: AppBar(
         title: Text("Cadastrar Matéria"),
       ),
-      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -47,7 +51,92 @@ class CadastrarMateria extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const TriceBottomNavigationBar(numeroTela: 3),
+      bottomNavigationBar: Container(
+        color: const Color(0xFF1B263B),
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+              onPressed: () {
+                // Navegar para Menu
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TelaInicial()),
+                );
+              },
+              child: const Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.home, color: Colors.white70),
+                  Text("Menu", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                ],
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+              onPressed: () {
+                // Navegar para Configurações
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TelaConfiguracoes()),
+                );
+              },
+              child: const Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.settings, color: Colors.white70),
+                  Text("Configurações", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                ],
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+              onPressed: () {
+                // Navegar para Perfil
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PerfildoAluno()),
+                );
+              },
+              child: const Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.person, color: Colors.white70),
+                  Text("Perfil", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                ],
+              ),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+              onPressed: () {
+                // Navegar para Notas
+              },
+              child: const Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.grade, color: Colors.white70),
+                  Text("Notas", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      // bottomNavigationBar: const TriceBottomNavigationBar(numeroTela: 3),
     );
   }
 }

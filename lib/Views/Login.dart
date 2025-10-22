@@ -9,7 +9,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.lightBlue,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -49,7 +49,7 @@ class Login extends StatelessWidget {
                 child: const TriceText(
                   label: 'Cadastrar',
                   fontSize: 16,
-                  color: Colors.blue,
+                  color: Colors.white,
                   decoration: TextDecoration.underline,
                 ),
               ),
