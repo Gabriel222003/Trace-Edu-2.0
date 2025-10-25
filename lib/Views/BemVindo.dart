@@ -15,7 +15,6 @@ class Bemvindo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
       body: SafeArea(
         child: Center(
           child: Padding(

@@ -23,9 +23,19 @@ class MyApp extends StatelessWidget {
       title: 'Projeto Flutter',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.blue.shade50, // cor de fundo clara e agradável
+        scaffoldBackgroundColor: Colors.lightBlue, // cor de fundo clara e agradável
         textTheme: ThemeData.light().textTheme.apply(
           decoration: TextDecoration.none, // remove underline de todos os textos
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.lightBlue,
+          elevation: 0,
+          titleTextStyle: const TextStyle(
+            color: Colors.white,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,

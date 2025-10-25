@@ -18,7 +18,6 @@ class CadastrarMateria extends StatelessWidget {
     final faltasController = TextEditingController();
 
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
       appBar: AppBar(
         title: Text("Cadastrar Matéria"),
       ),

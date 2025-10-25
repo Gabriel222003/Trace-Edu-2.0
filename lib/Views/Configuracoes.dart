@@ -19,17 +19,9 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
-        elevation: 0,
         title: const Text(
           "Configurações",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
-          ),
         ),
         centerTitle: false,
       ),
