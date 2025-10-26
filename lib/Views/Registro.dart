@@ -12,7 +12,7 @@ class Registro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.lightBlue,
       appBar: AppBar(title: const Text('Registro')),
       body: Padding(
         padding: const EdgeInsets.all(20),

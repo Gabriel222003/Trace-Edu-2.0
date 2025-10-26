@@ -9,20 +9,18 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.lightBlue,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
-                ),
+              const TriceText(
+                label: 'Login',
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
               ),
               const SizedBox(height: 40.0),
               TriceTextField(
@@ -48,13 +46,11 @@ class Login extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamed(context, '/registrar');
                 },
-                child: const Text(
-                  'Cadastrar',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.blue,
-                    decoration: TextDecoration.underline,
-                  ),
+                child: const TriceText(
+                  label: 'Cadastrar',
+                  fontSize: 16,
+                  color: Colors.white,
+                  decoration: TextDecoration.underline,
                 ),
               ),
             ],
