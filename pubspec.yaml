@@ -33,6 +33,7 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   flutter:
     sdk: flutter
+  shared_preferences: ^2.1.1
   fl_chart: ^1.1.1
   #image_picker: ^1.0.4 #para selecionar imagens da galeria ou câmera
   #file_picker: ^10.3.3 #para selecionar arquivos em geral, como PDFs, documentos, etc
