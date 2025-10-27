@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart'; // Adicione esta importação
 
 class TelaConfiguracoes extends StatefulWidget {
   const TelaConfiguracoes({super.key});
@@ -16,15 +17,47 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
   bool ingles = false;
   bool portugues = true;
 
+  late SharedPreferences _prefs; // Instância para SharedPreferences
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSettings(); // Carrega as configurações salvas ao inicializar
+  }
+
+  // Função para carregar as configurações do SharedPreferences
+  Future<void> _loadSettings() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      alertMaterias = _prefs.getBool('alertMaterias') ?? false;
+      alertFaltas = _prefs.getBool('alertFaltas') ?? false;
+      fonteGrande = _prefs.getBool('fonteGrande') ?? false;
+      temaEscuro = _prefs.getBool('temaEscuro') ?? false;
+      temaClaro = _prefs.getBool('temaClaro') ?? false;
+      ingles = _prefs.getBool('ingles') ?? false;
+      portugues = _prefs.getBool('portugues') ?? true;
+    });
+  }
+
+  // Função para salvar as configurações no SharedPreferences
+  Future<void> _saveSettings() async {
+    await _prefs.setBool('alertMaterias', alertMaterias);
+    await _prefs.setBool('alertFaltas', alertFaltas);
+    await _prefs.setBool('fonteGrande', fonteGrande);
+    await _prefs.setBool('temaEscuro', temaEscuro);
+    await _prefs.setBool('temaClaro', temaClaro);
+    await _prefs.setBool('ingles', ingles);
+    await _prefs.setBool('portugues', portugues);
+    // Opcional: Mostrar um snackbar ou toast para confirmar o salvamento
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text('Configurações salvas!')));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Configurações",
-        ),
-        centerTitle: false,
-      ),
+      appBar: AppBar(title: const Text("Configurações"), centerTitle: false),
       body: ListView(
         children: [
           // Seção: Notificações
@@ -199,9 +232,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              onPressed: () {
-                // ação de salvar
-              },
+              onPressed: _saveSettings, // Chama a função de salvar
               child: const Text(
                 "Salvar",
                 style: TextStyle(
