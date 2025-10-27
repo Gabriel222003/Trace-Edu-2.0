@@ -62,13 +62,16 @@ class _LoginState extends State<Login> {
                   // Aqui você pode chamar o login da API
                   if (email.isNotEmpty && senha.isNotEmpty) {
                     print('Email: $email, Senha: $senha');
+                    Navigator.pushReplacementNamed(context, '/telaInicial');
                     await usuario.configurarToken();
-                    if(await usuario.login(email, senha)){
-                      Navigator.pushReplacementNamed(context, '/telaInicial');
+
+                    // ---------------------------- logica para consultar a api -----------------------------
+                    /*if(await usuario.login(email, senha)){
+                      
                     }else{
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Preencha todos os campos')));
-                    }
+                    }*/
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Preencha todos os campos')),
