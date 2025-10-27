@@ -15,6 +15,7 @@ class Bemvindo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -26,7 +27,7 @@ class Bemvindo extends StatelessWidget {
                   label: 'Bem-vindo!',
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87, // o fundo agora é claro
+                  color: Colors.black,
                   ),
                 const SizedBox(height: 24.0),
                 const TriceText(
@@ -34,7 +35,7 @@ class Bemvindo extends StatelessWidget {
                   fontWeight: FontWeight.normal,
                   textAlign: TextAlign.center,
                   fontSize: 20,
-                  color: Colors.black54,
+                  color: Colors.white,
                   ),
                 const SizedBox(height: 40.0),
                 ElevatedButton(

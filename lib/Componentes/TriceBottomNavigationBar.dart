@@ -1,66 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:trace_edu/Componentes/TricePlaceHolder.dart';
 
-class TriceBottomNavigationBarItem extends StatefulWidget {
-  const TriceBottomNavigationBarItem({super.key});
+class TriceBottomNavigationBar extends StatelessWidget {
+  final int numeroTela; // Indica qual tela está selecionada
 
-  @override
-  _TriceBottomNavigationBarItem createState() => _TriceBottomNavigationBarItem();
-}
+  const TriceBottomNavigationBar({super.key, required this.numeroTela});
 
-class _TriceBottomNavigationBarItem extends State<TriceBottomNavigationBarItem> {
-  int _selectedIndex = 0;
-  late List<Widget> _telas;
-
-
-  
-  
-
-  @override
-  void initState() {
-    super.initState();
-    _telas = [
-      const TricePlaceholderScreen(title: 'Faltas'),
-      const TricePlaceholderScreen(title: 'Notas'),
-      const TricePlaceholderScreen(title: 'Matérias'),
+  void _onItemTapped(BuildContext context, int index) {
+    const routes = [
+      '/telaInicial',
+      '/faltas',
+      '/notas',
+      '/cadastrarMateria',
     ];
-  }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    // Só troca se for diferente da rota atual
+    if (index != numeroTela) {
+      Navigator.pushNamed(context, routes[index]);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _telas[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Início',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Faltas',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Notas',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.edit),
-            label: 'Matérias',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: const Color.fromARGB(255, 0, 0, 0),
-        unselectedItemColor: const Color.fromARGB(179, 135, 134, 134),
-        backgroundColor: Colors.blue[900],
-        onTap: _onItemTapped,
-      ),
+    return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      currentIndex: numeroTela,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.white70,
+      backgroundColor: Colors.blue[900],
+      onTap: (index) => _onItemTapped(context, index),
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Início',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.calendar_today),
+          label: 'Faltas',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.book),
+          label: 'Notas',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.edit),
+          label: 'Matérias',
+        ),
+      ],
     );
   }
 }
