@@ -155,7 +155,7 @@ class CadastrarMateria extends StatelessWidget {
               child: const Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.grade, color: Colors.white70),
+                  Icon(Icons.class_sharp, color: Colors.white70),
                   Text(
                     "Faltas",
                     style: TextStyle(color: Colors.white70, fontSize: 12),
