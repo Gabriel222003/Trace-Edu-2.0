@@ -3,6 +3,7 @@ import 'package:trace_edu/Models/ModelMateria.dart';
 import 'package:trace_edu/Controllers/ControllerMateria.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:trace_edu/Views/Configuracoes.dart';
+import 'package:trace_edu/Views/Faltas.dart';
 import 'package:trace_edu/Views/PerfildoAluno.dart';
 import '../Componentes/TriceText.dart';
 import '../Componentes/TriceBuildNavButton.dart';
@@ -56,22 +57,30 @@ class _TelaInicialState extends State<TelaInicial> {
                       icon: Icons.calendar_today,
                       label: 'Faltas',
                       onTap: () {
-                        // Navega para a aba Faltas
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Faltas(),
+                          ),
+                        );
                       },
                     ),
                     TriceBuildNavButton(
                       icon: Icons.book,
-                      label: 'Notas',
+                      label: 'Perfil',
                       onTap: () {
-                        // Navega para a aba Notas
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PerfildoAluno(),
+                          ),
+                        );
                       },
                     ),
                     TriceBuildNavButton(
                       icon: Icons.edit,
-                      label: 'Matérias',
-                      // Pensar na lógica que tenho que executar aqui
+                      label: 'Cadastrar Matérias',
                       onTap: () async {
-                        // Navega para a tela de adicionar matéria (Vai dar erro pois falta a tela )
                         final novaMateria = await Navigator.pushNamed(
                           context,
                           '/cadastrarMateria',
@@ -230,7 +239,10 @@ class _TelaInicialState extends State<TelaInicial> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.home, color: Color(0xFF4FAAFF)),
-                  Text("Menu", style: TextStyle(color: Color(0xFF4FAAFF), fontSize: 12)),
+                  Text(
+                    "Menu",
+                    style: TextStyle(color: Color(0xFF4FAAFF), fontSize: 12),
+                  ),
                 ],
               ),
             ),
@@ -250,7 +262,10 @@ class _TelaInicialState extends State<TelaInicial> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.settings, color: Colors.white70),
-                  Text("Configurações", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                  Text(
+                    "Configurações",
+                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
                 ],
               ),
             ),
@@ -270,7 +285,10 @@ class _TelaInicialState extends State<TelaInicial> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.person, color: Colors.white70),
-                  Text("Perfil", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                  Text(
+                    "Perfil",
+                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
                 ],
               ),
             ),
@@ -280,20 +298,26 @@ class _TelaInicialState extends State<TelaInicial> {
                 elevation: 0,
               ),
               onPressed: () {
-                // Navegar para Notas
+                // Navegar para Faltas
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Faltas()),
+                );
               },
               child: const Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.grade, color: Colors.white70),
-                  Text("Notas", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                  Text(
+                    "Faltas",
+                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
                 ],
               ),
             ),
           ],
         ),
       ),
-     // bottomNavigationBar: const TriceBottomNavigationBar(numeroTela: 0),
     );
   }
 }

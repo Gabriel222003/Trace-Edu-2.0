@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // Adicione esta importação
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:trace_edu/Views/Login.dart';
+import 'package:trace_edu/Views/TelaInicial.dart'; // Adicione esta importação
 
 class TelaConfiguracoes extends StatefulWidget {
   const TelaConfiguracoes({super.key});
@@ -62,7 +64,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
         children: [
           // Seção: Notificações
           ListTile(
-            leading: Icon(Icons.notifications, color: Colors.white70),
+            leading: Icon(Icons.notifications, color: Colors.white),
             title: const Text(
               "Notificações",
               style: TextStyle(
@@ -103,7 +105,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
           Divider(color: Colors.white30),
           // Seção: Acessibilidade
           ListTile(
-            leading: Icon(Icons.accessibility, color: Colors.white70),
+            leading: Icon(Icons.accessibility, color: Colors.white),
             title: const Text(
               "Acessibilidade",
               style: TextStyle(
@@ -160,7 +162,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
           Divider(color: Colors.white30),
           // Seção: Linguagem
           ListTile(
-            leading: Icon(Icons.language, color: Colors.white70),
+            leading: Icon(Icons.language, color: Colors.white),
             title: const Text(
               "Linguagem",
               style: TextStyle(
@@ -217,8 +219,17 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
               "Sair",
               style: TextStyle(color: Colors.redAccent, fontSize: 16),
             ),
-            onTap: () {
-              // ação de sair
+            onTap: () async {
+              // Limpar dados do local storage
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.clear(); // Limpa todos os dados armazenados
+
+              // Navegar de volta para a tela inicial ou de login
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => Login()),
+                (Route<dynamic> route) =>
+                    false, // Remove todas as rotas anteriores
+              );
             },
           ),
           Divider(color: Colors.white30),

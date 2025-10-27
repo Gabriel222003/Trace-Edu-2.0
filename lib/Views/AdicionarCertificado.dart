@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 //import 'package:image_picker/image_picker.dart'; // Adicione esta dependência ao pubspec.yaml: image_picker: ^1.0.4
 import 'dart:io'; // Para File
 import 'PerfildoAluno.dart';
@@ -40,8 +40,8 @@ class _AdicionarCertificadoScreenState
             onPressed: () {
               if (nomeController.text.isNotEmpty &&
                   descricaoController.text.isNotEmpty) {
-                final certificado = Certificado(
-                  nome: nomeController.text,
+               /* final certificado = Certificado(
+                 nome: nomeController.text,
                   descricao: descricaoController.text,
                   imagem: imagemSelecionada,
                 );
@@ -76,10 +76,11 @@ class _AdicionarCertificadoScreenState
               child: const Text("Selecionar Imagem"),
             ),
             if (imagemSelecionada != null)
-              Image.file(imagemSelecionada!, height: 100),
-          ],
-        ),
+              Image.file(imagemSelecionada!, height: 100), */
+         ],
+       ),
       ),
-    );
+      )
+   // );
   }
-}
+}*/

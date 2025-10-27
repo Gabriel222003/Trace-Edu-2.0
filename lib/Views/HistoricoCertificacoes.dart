@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'PerfildoAluno.dart';
 import 'dart:io'; // Para File
 
@@ -36,3 +36,4 @@ class HistoricoCertificacoesScreen extends StatelessWidget {
     );
   }
 }
+*/

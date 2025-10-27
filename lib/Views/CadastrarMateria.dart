@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trace_edu/Views/Configuracoes.dart';
+import 'package:trace_edu/Views/Faltas.dart';
 import 'package:trace_edu/Views/PerfildoAluno.dart';
 import 'package:trace_edu/Views/TelaInicial.dart';
 import '../Controllers/ControllerCadastrarMateria.dart';
@@ -18,9 +19,7 @@ class CadastrarMateria extends StatelessWidget {
     final faltasController = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Cadastrar Matéria"),
-      ),
+      appBar: AppBar(title: Text("Cadastrar Matéria")),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -34,15 +33,31 @@ class CadastrarMateria extends StatelessWidget {
                 color: Colors.black87,
               ),
               const SizedBox(height: 40.0),
-              TextField(controller: nomeController, decoration: const InputDecoration(labelText: 'Nome da Matéria')),
+              TextField(
+                controller: nomeController,
+                decoration: const InputDecoration(labelText: 'Nome da Matéria'),
+              ),
               const SizedBox(height: 12),
-              TextField(controller: presencaController, decoration: const InputDecoration(labelText: 'Presenças'), keyboardType: TextInputType.number),
+              TextField(
+                controller: presencaController,
+                decoration: const InputDecoration(labelText: 'Presenças'),
+                keyboardType: TextInputType.number,
+              ),
               const SizedBox(height: 12),
-              TextField(controller: faltasController, decoration: const InputDecoration(labelText: 'Faltas'), keyboardType: TextInputType.number,),
+              TextField(
+                controller: faltasController,
+                decoration: const InputDecoration(labelText: 'Faltas'),
+                keyboardType: TextInputType.number,
+              ),
               const SizedBox(height: 24.0),
               ElevatedButton(
                 onPressed: () {
-                  controller.adicionarMateria(context, nomeController, presencaController, faltasController);
+                  controller.adicionarMateria(
+                    context,
+                    nomeController,
+                    presencaController,
+                    faltasController,
+                  );
                 },
                 child: const Text('Adicionar'),
               ),
@@ -72,7 +87,10 @@ class CadastrarMateria extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.home, color: Colors.white70),
-                  Text("Menu", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                  Text(
+                    "Menu",
+                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
                 ],
               ),
             ),
@@ -92,7 +110,10 @@ class CadastrarMateria extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.settings, color: Colors.white70),
-                  Text("Configurações", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                  Text(
+                    "Configurações",
+                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
                 ],
               ),
             ),
@@ -112,7 +133,10 @@ class CadastrarMateria extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.person, color: Colors.white70),
-                  Text("Perfil", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                  Text(
+                    "Perfil",
+                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
                 ],
               ),
             ),
@@ -122,13 +146,20 @@ class CadastrarMateria extends StatelessWidget {
                 elevation: 0,
               ),
               onPressed: () {
-                // Navegar para Notas
+                // Navegar para Faltas
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Faltas()),
+                );
               },
               child: const Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.grade, color: Colors.white70),
-                  Text("Notas", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                  Text(
+                    "Faltas",
+                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
                 ],
               ),
             ),
