@@ -3,7 +3,7 @@ import '../Models/ModelMateria.dart';
 import 'ControllerMateria.dart';
 
 class ControllerCadastrarMateria {
-  final ControllerMateria controllerMateria = ControllerMateria();
+  final ControllerMateria controllerMateria = ControllerMateria(1);
 
   ModelMateria? validarMateria(
     TextEditingController nomeController,
@@ -15,13 +15,8 @@ class ControllerCadastrarMateria {
         faltasController.text.isEmpty) {
       return null;
     }
-
-    return ModelMateria(
-      nome: nomeController.text,
-      presenca: int.tryParse(presencaController.text) ?? 0,
-      faltas: int.tryParse(faltasController.text) ?? 0,
-    );
   }
+
 
   void adicionarMateria(
     BuildContext context,

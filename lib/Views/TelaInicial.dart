@@ -9,7 +9,7 @@ import '../Componentes/TriceBuildNavButton.dart';
 import '../Componentes/TriceBottomNavigationBar.dart';
 
 class TelaInicial extends StatefulWidget {
-  final ControllerMateria controllerMateria = ControllerMateria();
+  final ControllerMateria controllerMateria = ControllerMateria(1);
 
   TelaInicial({super.key});
 
@@ -172,7 +172,7 @@ class _TelaInicialState extends State<TelaInicial> {
                                   String nome = widget
                                       .controllerMateria
                                       .listaMaterias[index]
-                                      .nome;
+                                      .nomeMateria;
                                   if (nome.length > 12) {
                                     nome = nome.substring(0, 10) + '...';
                                   }

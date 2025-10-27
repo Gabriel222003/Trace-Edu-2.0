@@ -2,37 +2,29 @@ import 'package:flutter/material.dart';
 
 class TriceTextField extends StatelessWidget {
   final String label;
-  final IconData? icon;
-  final TextInputType keyboardType;
+  final IconData icon;
   final bool obscureText;
+  final TextInputType keyboardType;
+  final TextEditingController? controller; // 👈 novo
 
   const TriceTextField({
     Key? key,
     required this.label,
-    this.icon,
-    this.keyboardType = TextInputType.text,
+    required this.icon,
     this.obscureText = false,
+    this.keyboardType = TextInputType.text,
+    this.controller, // 👈 novo
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return TextField(
+      controller: controller, // 👈 conecta o texto
       obscureText: obscureText,
       keyboardType: keyboardType,
-      style: TextStyle(color: theme.textTheme.bodyLarge?.color),
       decoration: InputDecoration(
-        prefixIcon: icon != null ? Icon(icon, color: theme.primaryColor) : null,
+        prefixIcon: Icon(icon, color: Colors.black),
         labelText: label,
-        labelStyle: TextStyle(color: theme.primaryColor),
-        filled: true,
-        fillColor: theme.inputDecorationTheme.fillColor ?? Colors.white,
-        border: theme.inputDecorationTheme.border ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12.0),
-              borderSide: BorderSide(color: theme.primaryColor),
-            ),
       ),
     );
   }

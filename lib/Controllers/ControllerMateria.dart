@@ -1,37 +1,33 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:trace_edu/Models/ModelMateria.dart';
+import 'package:trace_edu/repositories/materia_repository.dart';
 
 class ControllerMateria {
+  final MateriaRepository materias = MateriaRepository();
   List<int> falta = [];
   List<double> presenca = [];
   List<String> nomes = [];
   List<ModelMateria> listaMaterias = [];
   int tamanho = 0;
 
-  ControllerMateria() {
-    _carregaMaterias();
+  ControllerMateria(int idUsuario) {
+    _carregaMaterias(idUsuario);
   }
 
-  void _carregaMaterias() {
-    listaMaterias = [
-      ModelMateria(nome: 'Arqui. de Computadores', presenca: 100, faltas: 0),
-      ModelMateria(nome: 'Extensão III', presenca: 60, faltas: 40),
-      ModelMateria(nome: 'Controle', presenca: 70, faltas: 30),
-      ModelMateria(nome: 'Redes I', presenca: 90, faltas: 10),
-      ModelMateria(nome: 'Programação III', presenca: 80, faltas: 20),
-    ];
+  void _carregaMaterias(int idUsuario) async{
+    final listaMaterias = await materias.getMateriasPorUsuario(idUsuario);
     tamanho = listaMaterias.length;
-    nomes = listaMaterias.map((m) => m.nome).toList();
-    presenca = listaMaterias.map((m) => m.presenca.toDouble()).toList();
-    falta = listaMaterias.map((m) => m.faltas).toList();
+    nomes = listaMaterias.map((m) => m.nomeMateria).toList();
+    presenca = listaMaterias.map((m) => m.horaAula.toDouble()).toList();
+    falta = listaMaterias.map((m) => m.qtdFaltas).toList();
   }
 
   void adicionaMateria(ModelMateria materia) {
     listaMaterias.add(materia);
-    nomes.add(materia.nome);
-    presenca.add(materia.presenca.toDouble());
-    falta.add(materia.faltas);
+    nomes.add(materia.nomeMateria);
+    presenca.add(materia.horaAula.toDouble());
+    falta.add(materia.qtdFaltas);
     tamanho++;
   }
 

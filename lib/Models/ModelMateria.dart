@@ -1,16 +1,32 @@
+
 class ModelMateria {
-  final String nome;
-  final int presenca;
-  final int faltas;
+  final int idMateria;
+  final String nomeMateria;
+  final int horas;
+  final int horaAula;
+  final int idUsuario;
+  final int qtdFaltas;
+  final double calcularPercentualFaltas;
 
   ModelMateria({
-    required this.nome,
-    required this.presenca,
-    required this.faltas,
+    required this.idMateria,
+    required this.nomeMateria,
+    required this.horas,
+    required this.horaAula,
+    required this.qtdFaltas,
+    required this.idUsuario,
+    required this.calcularPercentualFaltas,
   });
 
-  double getAttendancePercentage() {
-    final total = presenca + faltas;
-    return total == 0 ? 0 : (presenca / total) * 100;
+  factory ModelMateria.fromJson(Map<String, dynamic> json){
+    return ModelMateria(
+      idMateria: json['idMateria'],
+      nomeMateria: json['nomeMateria'], 
+      horas: json['horas'], 
+      horaAula: json['horaAula'],
+      idUsuario: json['idUsuario'],
+      qtdFaltas: json['qtdFaltas'],
+      calcularPercentualFaltas: json['calcularPercentualFaltas'],
+      );
   }
 }
