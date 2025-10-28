@@ -43,6 +43,7 @@ dependencies:
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.1
   flutter_test:
     sdk: flutter
 
@@ -56,9 +57,19 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/App_icon.png"
+  adaptive_icon_background: "#4A90E2" # cor de fundo azul (ajuste se quiser)
+  adaptive_icon_foreground: "assets/icon/App_icon.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+
 # The following section is specific to Flutter packages.
 flutter:
-
+  assets:
+    - assets/icon/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

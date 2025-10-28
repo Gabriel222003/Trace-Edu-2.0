@@ -26,7 +26,7 @@ class ModelMateria {
       horaAula: json['horaAula'],
       idUsuario: json['idUsuario'],
       qtdFaltas: json['qtdFaltas'],
-      calcularPercentualFaltas: json['calcularPercentualFaltas'],
+      calcularPercentualFaltas: json['calcularPercentualFaltas'].toDouble(),
       );
   }
 }

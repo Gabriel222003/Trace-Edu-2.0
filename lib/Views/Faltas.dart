@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import '../Componentes/TriceText.dart';
-import '../Componentes/TriceBottomNavigationBar.dart';
 import 'package:trace_edu/Views/Configuracoes.dart';
 import 'package:trace_edu/Views/PerfildoAluno.dart';
-import 'package:trace_edu/Views/TelaInicial.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Faltas extends StatelessWidget {
   const Faltas({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final storage = const FlutterSecureStorage();
     List<String> nomesMaterias = [
       'AED',
       'IoT',
@@ -199,11 +198,9 @@ class Faltas extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TelaInicial()),
-                );
+              onPressed: () async{
+                final idUsuario = await storage.read(key: 'idUsuario');
+                Navigator.pushReplacementNamed(context, '/telaInicial', arguments: idUsuario,);
               },
               child: const Column(
                 mainAxisSize: MainAxisSize.min,

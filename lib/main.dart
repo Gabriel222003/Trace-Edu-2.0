@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: isFirstTime ? const Bemvindo() : const Login(),
-      routes: Routes.routes,
+      onGenerateRoute: Routes.onGenerateRoute,
     );
   }
 }

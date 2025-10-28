@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trace_edu/Componentes/TriceText.dart';
 import 'package:trace_edu/Componentes/TriceTextField.dart';
-import 'package:trace_edu/providers/usuario_provider.dart';
-import 'package:trace_edu/repositories/usuario_repository.dart';
+import 'package:trace_edu/Controllers/ControllerLogin.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -12,9 +11,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final Controllerlogin controller = Controllerlogin();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController senhaController = TextEditingController();
-  final UsuarioRepository usuario = UsuarioRepository();
 
   @override
   void dispose() {
@@ -56,27 +55,7 @@ class _LoginState extends State<Login> {
               const SizedBox(height: 24.0),
               ElevatedButton(
                 onPressed: () async {
-                  final email = emailController.text.trim();
-                  final senha = senhaController.text.trim();
-
-                  // Aqui você pode chamar o login da API
-                  if (email.isNotEmpty && senha.isNotEmpty) {
-                    print('Email: $email, Senha: $senha');
-                    Navigator.pushReplacementNamed(context, '/telaInicial');
-                    await usuario.configurarToken();
-
-                    // ---------------------------- logica para consultar a api -----------------------------
-                    /*if(await usuario.login(email, senha)){
-                      
-                    }else{
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Preencha todos os campos')));
-                    }*/
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Preencha todos os campos')),
-                    );
-                  }
+                  controller.login(context, emailController, senhaController);
                 },
                 child: const Text('Entrar'),
               ),

@@ -1,9 +1,18 @@
-import 'dart:ui';
-import 'package:flutter/material.dart';
-import 'package:trace_edu/Models/ModelMateria.dart';
 import 'package:trace_edu/repositories/materia_repository.dart';
 
 class ControllerMateria {
+  final String token = "";
+  
+
+
+
+
+
+
+
+
+
+  /*
   final MateriaRepository materias = MateriaRepository();
   List<int> falta = [];
   List<double> presenca = [];
@@ -48,4 +57,5 @@ class ControllerMateria {
 
     return cores;
   }
+  */
 }

@@ -1,25 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:trace_edu/Controllers/ControllerCadastrarMateria.dart';
 import 'package:trace_edu/Views/Configuracoes.dart';
 import 'package:trace_edu/Views/Faltas.dart';
 import 'package:trace_edu/Views/PerfildoAluno.dart';
-import 'package:trace_edu/Views/TelaInicial.dart';
-import '../Controllers/ControllerCadastrarMateria.dart';
 import '../Componentes/TriceText.dart';
-import '../Componentes/TriceBottomNavigationBar.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class CadastrarMateria extends StatelessWidget {
   const CadastrarMateria({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final storage = const FlutterSecureStorage();
     final controller = ControllerCadastrarMateria();
-
-    final nomeController = TextEditingController();
-    final presencaController = TextEditingController();
-    final faltasController = TextEditingController();
+    final nomeMateria = TextEditingController();
+    final horas = TextEditingController();
+    final horaAula = TextEditingController();
+    final qtdFaltas = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(title: Text("Cadastrar Matéria")),
+      appBar: AppBar(title: Text("Cadastrar Matéria"),
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () async{
+          Navigator.pop(context, true);
+        },
+      ),
+    ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -34,30 +41,56 @@ class CadastrarMateria extends StatelessWidget {
               ),
               const SizedBox(height: 40.0),
               TextField(
-                controller: nomeController,
+                controller: nomeMateria,
                 decoration: const InputDecoration(labelText: 'Nome da Matéria'),
               ),
               const SizedBox(height: 12),
               TextField(
-                controller: presencaController,
-                decoration: const InputDecoration(labelText: 'Presenças'),
+                controller: horas,
+                decoration: const InputDecoration(labelText: 'Total de horas da matéria(exemplo: 120)'),
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 12),
               TextField(
-                controller: faltasController,
-                decoration: const InputDecoration(labelText: 'Faltas'),
+                controller: horaAula,
+                decoration: const InputDecoration(labelText: 'Quantidade de horas da matéria em minutos(exemplo: 240)'),
+                keyboardType: TextInputType.number,
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: qtdFaltas,
+                decoration: const InputDecoration(labelText: 'Quantidade de faltas'),
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 24.0),
               ElevatedButton(
-                onPressed: () {
-                  controller.adicionarMateria(
-                    context,
-                    nomeController,
-                    presencaController,
-                    faltasController,
+                onPressed: () async{
+                  final idUsuario = await storage.read(key: 'idUsuario');
+
+                  if (idUsuario == null || nomeMateria.text.isEmpty || horas.text.isEmpty || horaAula.text.isEmpty || qtdFaltas.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Preencha todos os campos corretamente')),
+                    );
+                    return;
+                  }
+
+                  controller.adiconarMateria(
+                    nomeMateria.text,
+                    int.parse(horas.text),
+                    int.parse(horaAula.text),
+                    int.parse(idUsuario),
+                    int.parse(qtdFaltas.text),
                   );
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Matéria adicionada com sucesso!')),
+                  );
+
+                  // Limpar campos
+                  nomeMateria.clear();
+                  horas.clear();
+                  horaAula.clear();
+                  qtdFaltas.clear();
                 },
                 child: const Text('Adicionar'),
               ),
@@ -76,12 +109,11 @@ class CadastrarMateria extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
               ),
-              onPressed: () {
+              onPressed: () async{
                 // Navegar para Menu
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TelaInicial()),
-                );
+                  final idUsuario = await storage.read(key: 'idUsuario');
+                  Navigator.pushReplacementNamed(context, '/telaInicial', arguments: idUsuario,);
+               
               },
               child: const Column(
                 mainAxisSize: MainAxisSize.min,

@@ -1,9 +1,27 @@
-import 'package:flutter/material.dart';
-import '../Models/ModelMateria.dart';
-import 'ControllerMateria.dart';
+import '../repositories/materia_repository.dart'; // <- onde está o getMateriasPorUsuario()
 
 class ControllerCadastrarMateria {
-  final ControllerMateria controllerMateria = ControllerMateria(1);
+  final MateriaRepository _repo = MateriaRepository();
+
+  void adiconarMateria(String nomeMateria, int horas, int horaAula, int idUsuario, int qtdFaltas){
+
+    _repo.adicionarMateria(
+      {
+        "idMateria": 0,
+        "nomeMateria": nomeMateria,
+        "horas": horas,
+        "horaAula": horaAula,
+        "idUsuario": idUsuario,
+        "qtdFaltas": qtdFaltas
+      }
+    );
+
+
+  }
+
+
+  /*
+  final ControllerMateria controllerMateria = ControllerMateria();
 
   ModelMateria? validarMateria(
     TextEditingController nomeController,
@@ -38,4 +56,6 @@ class ControllerCadastrarMateria {
     }
     Navigator.pop(context, materia);
   }
+
+  */
 }

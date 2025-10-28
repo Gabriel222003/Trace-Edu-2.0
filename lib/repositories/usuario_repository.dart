@@ -1,7 +1,6 @@
-import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:dio/dio.dart';
-import 'package:trace_edu/Models/Autentica%C3%A7%C3%A3o.dart';
+import 'package:trace_edu/Models/Autenticacao.dart';
 import 'package:trace_edu/Models/ModelUsuario.dart';
 import '../core/api_client.dart';
 
@@ -42,9 +41,10 @@ class UsuarioRepository {
     });
 
     if(response.statusCode == 200){
-      final data = jsonDecode(response.data);
+      final data = response.data;
       final autenticacao = Autenticacao.fromJson(data);
       await storage.write(key: 'jwt', value: autenticacao.token);
+      await storage.write(key: 'idUsuario', value: autenticacao.id);
       return true;
     }else {
         throw Exception('Falha no login: ${response.statusCode}');

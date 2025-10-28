@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:trace_edu/Views/Configuracoes.dart';
 import 'package:trace_edu/Views/Faltas.dart';
-import 'package:trace_edu/Views/TelaInicial.dart';
 import 'EditarPerfil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 // import 'package:image_picker/image_picker.dart'; // Adicione esta dependência ao pubspec.yaml: image_picker: ^1.0.4
 // import 'dart:io'; // Para File
@@ -26,6 +26,7 @@ class PerfildoAluno extends StatefulWidget {
 }
 
 class _PerfildoAlunoState extends State<PerfildoAluno> {
+  final storage = const FlutterSecureStorage();
   // Variáveis de estado para os dados do perfil
   String nome = "";
   String curso = "";
@@ -177,12 +178,10 @@ class _PerfildoAlunoState extends State<PerfildoAluno> {
                 backgroundColor: Colors.transparent,
                 elevation: 0,
               ),
-              onPressed: () {
+              onPressed: () async{
                 // Navegar para Menu
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TelaInicial()),
-                );
+                final idUsuario = await storage.read(key: 'idUsuario');
+                Navigator.pushReplacementNamed(context, '/telaInicial', arguments: idUsuario,);
               },
               child: const Column(
                 mainAxisSize: MainAxisSize.min,

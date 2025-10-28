@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:io'; // Para File
+import '../Models/ModelUsuario.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:trace_edu/Controllers/ControllerEditarPerfil.dart'; // Para File
 
 // Tela para editar o perfil
 class EditarPerfilScreen extends StatefulWidget {
@@ -19,6 +21,8 @@ class EditarPerfilScreen extends StatefulWidget {
 }
 
 class _EditarPerfilScreenState extends State<EditarPerfilScreen> {
+  final storage = const FlutterSecureStorage();
+  final ControllerEditarPerfil controller = ControllerEditarPerfil();
   late TextEditingController nomeController;
   late TextEditingController cursoController;
   late TextEditingController semestreController;
@@ -29,6 +33,24 @@ class _EditarPerfilScreenState extends State<EditarPerfilScreen> {
     nomeController = TextEditingController(text: widget.nomeAtual);
     cursoController = TextEditingController(text: widget.cursoAtual);
     semestreController = TextEditingController(text: widget.semestreAtual);
+    carregarUsuario();
+  }
+
+  Future<void> carregarUsuario() async {
+    final idUsuario = await storage.read(key: 'idUsuario');
+    if (idUsuario == null) return;
+
+    List<ModelUsuario> usuarios = await controller.getUsuariosId(int.parse(idUsuario));
+
+    if (usuarios.isNotEmpty) {
+      final usuario = usuarios.first;
+
+      // Atualiza os controllers com os dados do usuário
+      setState(() {
+        nomeController.text = usuario.nomeUsuario;      // atribui o nome
+
+      });
+    }
   }
 
   @override
