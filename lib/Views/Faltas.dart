@@ -16,6 +16,13 @@ class Faltas extends StatelessWidget {
       'Proj. Embarcados',
       'Proj. Computação',
     ];
+    List<int> faltas = [
+      1,
+      3,
+      6,
+      7,
+      9,
+    ];
     final List<ValueNotifier<bool>> openPanels = List.generate(
       nomesMaterias.length,
       (_) => ValueNotifier(false),
@@ -37,6 +44,7 @@ class Faltas extends StatelessWidget {
                     children: List.generate(nomesMaterias.length, (index) {
                       final nome = nomesMaterias[index];
                       final isOpenNotifier = openPanels[index];
+                      final falt = faltas[index];
                       return ValueListenableBuilder<bool>(
                         valueListenable: isOpenNotifier,
                         builder: (context, isOpen, _) {
@@ -82,6 +90,15 @@ class Faltas extends StatelessWidget {
                                         ),
                                       ),
                                       const SizedBox(height: 10),
+                                      Row(
+                                        mainAxisAlignment: 
+                                            MainAxisAlignment.spaceBetween,
+                                        
+                                        children: [
+                                          // ignore: prefer_interpolation_to_compose_strings
+                                          Text("Você possui "+falt.toString()+" faltas"),
+                                        ]
+                                      ),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
@@ -282,3 +299,4 @@ class Faltas extends StatelessWidget {
     );
   }
 }
+
