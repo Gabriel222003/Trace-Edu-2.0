@@ -1,11 +1,10 @@
-
 class ModelMateria {
   final int idMateria;
   final String nomeMateria;
   final int horas;
   final int horaAula;
   final int idUsuario;
-  final int qtdFaltas;
+  int qtdFaltas;
   final double calcularPercentualFaltas;
 
   ModelMateria({
@@ -18,15 +17,38 @@ class ModelMateria {
     required this.calcularPercentualFaltas,
   });
 
-  factory ModelMateria.fromJson(Map<String, dynamic> json){
+  factory ModelMateria.fromJson(Map<String, dynamic> json) {
     return ModelMateria(
       idMateria: json['idMateria'],
-      nomeMateria: json['nomeMateria'], 
-      horas: json['horas'], 
+      nomeMateria: json['nomeMateria'],
+      horas: json['horas'],
       horaAula: json['horaAula'],
-      idUsuario: json['idUsuario'],
       qtdFaltas: json['qtdFaltas'],
-      calcularPercentualFaltas: json['calcularPercentualFaltas'].toDouble(),
-      );
+      idUsuario: json['idUsuario'],
+      calcularPercentualFaltas:
+          (json['calcularPercentualFaltas'] ?? 0).toDouble(),
+    );
+  }
+
+  // ✅ Método copyWith adicionado
+  ModelMateria copyWith({
+    int? idMateria,
+    String? nomeMateria,
+    int? horas,
+    int? horaAula,
+    int? idUsuario,
+    int? qtdFaltas,
+    double? calcularPercentualFaltas,
+  }) {
+    return ModelMateria(
+      idMateria: idMateria ?? this.idMateria,
+      nomeMateria: nomeMateria ?? this.nomeMateria,
+      horas: horas ?? this.horas,
+      horaAula: horaAula ?? this.horaAula,
+      idUsuario: idUsuario ?? this.idUsuario,
+      qtdFaltas: qtdFaltas ?? this.qtdFaltas,
+      calcularPercentualFaltas:
+          calcularPercentualFaltas ?? this.calcularPercentualFaltas,
+    );
   }
 }

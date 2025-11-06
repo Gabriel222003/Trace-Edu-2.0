@@ -43,8 +43,6 @@ class ControllerRegistro {
         'tipoUsuario': 1,
         'ativo': true,
       });
-      // Aqui no futuro você vai chamar o servidor.
-      // Por enquanto, pode simular o sucesso:
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Usuário ${nome.text} registrado com sucesso!')),
       );

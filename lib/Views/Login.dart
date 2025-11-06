@@ -54,7 +54,7 @@ class _LoginState extends State<Login> {
               ),
               const SizedBox(height: 24.0),
               ElevatedButton(
-                onPressed: () async {
+                onPressed: () {
                   controller.login(context, emailController, senhaController);
                 },
                 child: const Text('Entrar'),

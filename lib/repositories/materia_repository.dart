@@ -24,15 +24,15 @@ class MateriaRepository {
     await _dio.post('/api/Materia/PostAdicionarMateria', data: dados);
   }
 
-  Future<void> atualizarMateria(Map<String, dynamic> dados) async {
-    await _dio.put('/api/Materia/PutAtualizarMateria', data: dados);
+  Future<void> atualizarMateria(Map<String, dynamic> dados, int idUsuario) async {
+    await _dio.put('/api/Materia/PutAtualizarMateria', data: dados, queryParameters: {'idUsuario': idUsuario});
   }
 
-  Future<void> atualizarFaltas(Map<String, dynamic> dados) async {
-    await _dio.post('/api/Materia/PostAtualizarFaltas', data: dados);
+  Future<void> atualizarFaltas(Map<String, dynamic> dados, int idUsuario) async {
+    await _dio.post('/api/Materia/PostAtualizarFaltas', data: dados, queryParameters: {'idUsuario': idUsuario});
   }
 
-  Future<void> deletarMateria(int idMateria) async {
-    await _dio.delete('/api/Materia/DeleteMateria', queryParameters: {'idMateria': idMateria});
+  Future<void> deletarMateria(int idMateria, int idUsuario) async {
+    await _dio.delete('/api/Materia/DeleteMateria', queryParameters: {'idMateria': idMateria, 'idUsuario': idUsuario});
   }
 }
